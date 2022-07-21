@@ -202,6 +202,10 @@ h6 {
 }
 
 .header {
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 70px;
   font-family: 'Montserrat';
@@ -222,6 +226,7 @@ h6 {
 }
 
 .header__logo {
+  z-index: 1;
   color: var(--text-color);
   font-weight: 500;
   font-size: calc(20px + 0.5vw);
@@ -230,6 +235,7 @@ h6 {
 
 .header__menu-icon {
   display: block;
+  z-index: 1;
   position: relative;
   width: 30px;
   height: 18px;
@@ -279,7 +285,34 @@ h6 {
   transform: scale(1) translate(0px, -50%);
 }
 
-.header__menu {}
+.header__menu {
+  display: flex;
+  flex-flow: column-reverse;
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding-top: 70px;
+  transition: left 0.3s ease 0s;
+  overflow: auto;
+}
+
+.header__menu._active {
+  left: 0;
+}
+
+.header__menu::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background-color: var(--nav-bar-color);
+  height: 70px;
+  z-index: 1;
+}
 
 .header__menu-items {}
 

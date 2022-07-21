@@ -60,7 +60,25 @@ class App {
   }
 
   render() {
-    console.log("render");
+    const lists = document.querySelector('.lists');
+
+    for (let showlist of this.showlists) {
+      const list = document.createElement('section');
+      list.classList.add('list');
+      list.classList.add(`list--${showlist.listName}`);
+
+      const title = document.createElement('h2');
+      title.classList.add('list__title');
+      title.innerHTML = capitalizeTitle(showlist.listName);
+
+      const shows = document.createElement('div');
+      shows.classList.add('shows');
+
+      list.append(title);
+      list.append(shows);
+
+      lists.append(list);
+    }
   }
 };
 
@@ -81,7 +99,7 @@ class Show {
   }
 }
 
-/* Helper functions */
+/* Utility functions */
 
 function capitalizeTitle(words) {
   words = words.split('-');

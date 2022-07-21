@@ -179,3 +179,16 @@ h6 {
   font-size: inherit;
   font-weight: inherit;
 }
+
+/*Переменные*/
+
+:root {
+  --nav-bar-color: #ffffff;
+  --main-color: #f3f3f3;
+  --text-color: #303030;
+  --watching-color: #32cd32;
+  --plan-to-watch-color: #fff5ee;
+  --completed: #4169E1;
+  --on-hold: #ffd700;
+  --dropped: #cd5c5c;
+}

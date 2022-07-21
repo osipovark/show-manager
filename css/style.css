@@ -314,8 +314,17 @@ h6 {
   z-index: 1;
 }
 
-.header__menu-items {}
+.header__menu-items {
+  margin-bottom: auto;
+}
 
-.header__menu-item {}
+.header__menu-item {
+  text-align: center;
+  margin-bottom: 40px;
+}
 
-.header__menu-link {}
+.header__menu-link {
+  font-size: calc(16px + 0.5vw);
+  color: var(--main-color);
+  font-weight: 500;
+}

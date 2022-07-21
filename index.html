@@ -40,7 +40,31 @@
       </nav>
     </div>
   </header>
-  <main class="lists"></main>
+  <main class="lists">
+    <div class="add-show-form">
+      <div class="add-show-form__header">
+        <h3 class="add-show-form__title">New show</h3>
+        <button class="add-show-form__close-button"></button>
+      </div>
+      <div class="add-show-form__inputs">
+        <input name="title" id="added-show-title" type="text" placeholder="Show title">
+        <textarea name="description" id="added-show-description" placeholder="Type your text here"></textarea>
+        <div class="add-show-form__list-options">
+          <label for="added-show-list">Choose a list for a show:</label>
+
+          <select name="lists" id="added-show-list">
+            <option value="plan-to-watch">Plan to watch</option>
+            <option value="watching">Watching</option>
+            <option value="completed">Completed</option>
+            <option value="on-hold">On hold</option>
+            <option value="dropped">Dropped</option>
+          </select>
+        </div>
+        <button class="add-show-form__submit-button hidden" id="submit-show-button">Submit show</button>
+        <button class="add-show-form__submit-button" id="change-show-button">Submit changes</button>
+      </div>
+    </div>
+  </main>
 </body>
 <script src="js/script.js"></script>
 

@@ -347,3 +347,122 @@ h6 {
 #add-show-button:active {
   background: radial-gradient(circle, rgb(48, 48, 48, 1) 0%, rgb(255, 255, 255, 1) 100%);
 }
+
+/* <Form for adding a show> */
+
+.add-show-form {
+  position: fixed;
+  top: 6vh;
+  right: -100%;
+  z-index: 1;
+  display: flex;
+  flex-flow: column;
+  gap: 32px;
+  width: 90vw;
+  height: 88vh;
+  padding: 4vh 4vw;
+  background-color: var(--nav-bar-color);
+  color: var(--text-color);
+  box-shadow: 0 0 1px var(--text-color), 4px 4px 4px var(--text-color);
+  border-radius: 10px;
+  transition: right 0.8s ease 0s;
+  overflow: auto;
+}
+
+.add-show-form._active {
+  right: 5vw;
+}
+
+.add-show-form__header {
+  flex: 0 0 calc(20px + 2vh);
+  display: flex;
+  font-size: calc(20px + 2vh);
+  font-weight: 500;
+  color: var(--nav-bar-color);
+  text-shadow: 0 0 1px var(--text-color), 2px 2px 1px var(--text-color);
+  text-align: center;
+}
+
+.add-show-form__title {
+  justify-self: center;
+  margin-left: auto;
+}
+
+.add-show-form__close-button {
+  background: url(../assets/img/icons/cancel.svg) center / cover;
+  opacity: 1;
+  margin-left: auto;
+  width: calc(20px + 2vh);
+  height: calc(20px + 2vh);
+  border-radius: calc(10px + 1vh);
+  cursor: pointer;
+}
+
+.add-show-form__inputs {
+  flex: 1 1 0;
+  gap: 2vh;
+  display: flex;
+  flex-flow: column;
+}
+
+.add-show-form__field {}
+
+#added-show-title {
+  flex: 0 1 40px;
+  width: 100%;
+  padding: 10px 20px;
+  font-size: calc(18px + 0.5vh);
+  font-weight: 500;
+  color: var(--nav-bar-color);
+  text-shadow: 2px 2px 2px var(--text-color);
+  background: lightgray;
+  box-shadow: 0 0 1px var(--text-color), 2px 2px 2px var(--text-color);
+}
+
+#added-show-description {
+  flex: 1 1 80px;
+  width: 100%;
+  font-size: calc(10px + 0.5vh);
+  text-align: justify;
+  white-space: normal;
+  padding: 20px;
+  resize: none;
+  box-shadow: 0 0 1px var(--text-color), 2px 2px 2px var(--text-color);
+}
+
+.add-show-form__list-options {
+  flex: 0.2 0 60px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: calc(16px + 0.5vh);
+}
+
+.add-show-form__list-options label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  font-weight: 500;
+}
+
+#added-show-list {
+  cursor: pointer;
+  height: 50%;
+  box-shadow: 0 0 1px var(--text-color), 2px 2px 2px var(--text-color);
+  background: var(--nav-bar-color);
+  text-align: center;
+  font-size: calc(16px + 0.5vh);
+  font-weight: 500;
+}
+
+.add-show-form__submit-button {
+  flex: 0.1 1 30px;
+  font-size: calc(16px + 0.5vh);
+  font-weight: 500;
+  background: var(--nav-bar-color);
+  color: var(--text-color);
+  box-shadow: 0 0 1px var(--text-color), 2px 2px 2px var(--text-color);
+}
+
+/* </Form for adding a show> */

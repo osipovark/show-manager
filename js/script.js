@@ -32,5 +32,17 @@ class App {
         title.value = 'title';
         description.value = 'text';
       });
+
+    /* On closing form */
+    document.querySelector('.add-show-form__close-button')
+      .addEventListener('click', (event) => {
+        event.target.closest('.add-show-form').classList.remove('_active');
+        let title = document.getElementById('added-show-title');
+        let description = document.getElementById('added-show-description');
+        let option = document.getElementById('added-show-list');
+        title.value = 'title';
+        description.value = 'text';
+        option.value = 'plan-to-watch';
+      });
   }
 };

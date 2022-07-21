@@ -260,6 +260,20 @@ h6 {
   bottom: 0;
 }
 
+.header__menu-icon._active::before {
+  top: 50%;
+  transform: rotate(-45deg) translate(0, -50%);
+}
+
+.header__menu-icon._active span {
+  transform: scale(0) translate(0px, -50%);
+}
+
+.header__menu-icon._active::after {
+  bottom: 50%;
+  transform: rotate(45deg) translate(0, 50%);
+}
+
 .header__menu-icon span {
   top: 50%;
   transform: scale(1) translate(0px, -50%);

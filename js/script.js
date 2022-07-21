@@ -57,6 +57,23 @@ class App {
         description.value = 'text';
         option.value = 'plan-to-watch';
       });
+
+    /* On submitting show */
+    document.getElementById('submit-show-button')
+      .addEventListener('click', () => {
+        let title = document.getElementById('added-show-title');
+        let description = document.getElementById('added-show-description');
+        let option = document.getElementById('added-show-list');
+        if (!title.value) {
+          alert("Show has to have a title");
+          title.focus();
+          return;
+        }
+        console.log("submit");
+        title.value = 'title';
+        description.value = 'text';
+        option.value = 'plan-to-watch';
+      });
   }
 
   render() {

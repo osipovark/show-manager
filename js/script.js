@@ -80,3 +80,11 @@ class Show {
     this.description = description;
   }
 }
+
+/* Helper functions */
+
+function capitalizeTitle(words) {
+  words = words.split('-');
+  words[0] = words[0].slice(0, 1).toUpperCase() + words[0].slice(1);
+  return words.join(' ');
+}

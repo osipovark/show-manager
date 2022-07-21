@@ -328,3 +328,22 @@ h6 {
   color: var(--main-color);
   font-weight: 500;
 }
+
+#add-show-button {
+  margin: 4px 0 40px 0;
+  height: calc(60px + 4vw);
+  width: 240px;
+  align-self: center;
+  background: radial-gradient(circle, rgb(48, 48, 48, 0.7) 0%, rgb(255, 255, 255, 0.7) 100%);
+  border-radius: 8px;
+  color: var(--nav-bar-color);
+  padding: 10px;
+  font-size: calc(20px + 0.5vw);
+  font-family: 'Fira Sans';
+  text-shadow: 2px 2px 0px var(--text-color);
+  font-weight: 400;
+}
+
+#add-show-button:active {
+  background: radial-gradient(circle, rgb(48, 48, 48, 1) 0%, rgb(255, 255, 255, 1) 100%);
+}

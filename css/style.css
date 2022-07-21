@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+
+/*Шрифты*/
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat-regular-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat-medium-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat-semibold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-semibold-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserrat-bold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserrat-bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../assets/fonts/montserratalternates-light-webfont.woff2') format('woff2'),
+    url('../assets/fonts/montserratalternates-light-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-light-webfont.woff2') format('woff2'),
+    url('firasans-light-webfont.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-regular-webfont.woff2') format('woff2'),
+    url('firasans-regular-webfont.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-medium-webfont.woff2') format('woff2'),
+    url('../assets/fonts/firasans-medium-webfont.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-semibold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/firasans-semibold-webfont.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-bold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/firasans-bold-webfont.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Fira Sans';
+  src: url('../assets/fonts/firasans-extrabold-webfont.woff2') format('woff2'),
+    url('../assets/fonts/firasans-extrabold-webfont.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}

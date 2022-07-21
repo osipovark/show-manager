@@ -11,6 +11,13 @@ class App {
   }
 
   init() {
+    this.showlists.push(new Showlist(this, 'plan-to-watch'));
+    this.showlists.push(new Showlist(this, 'watching'));
+    this.showlists.push(new Showlist(this, 'completed'));
+    this.showlists.push(new Showlist(this, 'on-hold'));
+    this.showlists.push(new Showlist(this, 'dropped'));
+
+    this.render();
 
     /* On clicking "hamburger" menu icon */
     document.querySelector('.header__menu-icon')
@@ -50,6 +57,10 @@ class App {
         description.value = 'text';
         option.value = 'plan-to-watch';
       });
+  }
+
+  render() {
+    console.log("render");
   }
 };
 

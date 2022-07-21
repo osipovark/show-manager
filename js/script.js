@@ -4,6 +4,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 class App {
+  static showCount = 0;
+
+  constructor() {
+    this.showlists = [];
+  }
+
   init() {
 
     /* On clicking "hamburger" menu icon */
@@ -46,3 +52,20 @@ class App {
       });
   }
 };
+
+class Showlist {
+  constructor(appRef, listName) {
+    this.appRef = appRef;
+    this.listName = listName;
+    this.shows = [];
+  }
+}
+
+class Show {
+  constructor(showlistRef, Id, title, description) {
+    this.showlistRef = showlistRef;
+    this.Id = Id;
+    this.title = title;
+    this.description = description;
+  }
+}

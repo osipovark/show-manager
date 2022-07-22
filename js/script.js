@@ -69,7 +69,8 @@ class App {
           title.focus();
           return;
         }
-        console.log("submit");
+        const list = this.showlists.find((list) => list.listName === option.value);
+        list.addShow(title.value, description.value, option.value);
         title.value = 'title';
         description.value = 'text';
         option.value = 'plan-to-watch';
@@ -104,6 +105,12 @@ class Showlist {
     this.appRef = appRef;
     this.listName = listName;
     this.shows = [];
+  }
+
+  addShow(title, description) {
+    const newShow = new Show(this, generateId(this.listName, this.shows.length), title, description);
+    this.shows.push(newShow);
+    App.showCount++;
   }
 }
 

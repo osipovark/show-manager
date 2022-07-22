@@ -71,6 +71,7 @@ class App {
         }
         const list = this.showlists.find((list) => list.listName === option.value);
         list.addShow(title.value, description.value, option.value);
+        list.shows[list.shows.length - 1].renderShow();
         title.value = 'title';
         description.value = 'text';
         option.value = 'plan-to-watch';
@@ -120,6 +121,71 @@ class Show {
     this.Id = Id;
     this.title = title;
     this.description = description;
+  }
+
+  renderShow(prepend = false) {
+    const list = document.querySelector(`.list--${this.showlistRef.listName}`);
+
+    if (!list.classList.contains('_active')) {
+      list.classList.add('_active');
+    }
+
+    const shows = list.querySelector(`.shows`);
+
+    const show = document.createElement('div');
+    show.classList.add('show');
+    show.id = this.Id;
+
+    const title = document.createElement('h3');
+    title.classList.add('show__title');
+    title.innerHTML = this.title;
+
+    const description = document.createElement('p');
+    description.classList.add('show__description');
+    description.innerHTML = this.description;
+
+    const footer = document.createElement('footer');
+    footer.classList.add('show__footer');
+
+    const controls = document.createElement('div');
+    controls.classList.add('show__controls');
+
+    const editButton = document.createElement('button');
+    editButton.classList.add('show__button');
+    editButton.classList.add('edit');
+    editButton.addEventListener('click', () => console.log('edit'));
+
+    const leftArrowButton = document.createElement('button');
+    leftArrowButton.classList.add('show__button');
+    leftArrowButton.classList.add('left-arrow');
+    leftArrowButton.addEventListener('click', () => console.log('left arrow'));
+
+    const rightArrowButton = document.createElement('button');
+    rightArrowButton.classList.add('show__button');
+    rightArrowButton.classList.add('right-arrow');
+    rightArrowButton.addEventListener('click', () => console.log('right arrow'));
+
+    const deleteButton = document.createElement('button');
+    deleteButton.classList.add('show__button');
+    deleteButton.classList.add('delete');
+    deleteButton.addEventListener('click', () => console.log('delete'));
+
+    controls.append(editButton);
+    controls.append(leftArrowButton);
+    controls.append(rightArrowButton);
+    controls.append(deleteButton);
+
+    footer.append(controls);
+
+    show.append(title);
+    show.append(description);
+    show.append(footer);
+
+    if (prepend) {
+      shows.prepend(show);
+    } else {
+      shows.append(show);
+    }
   }
 }
 

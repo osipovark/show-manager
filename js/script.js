@@ -118,6 +118,10 @@ class Show {
 
 /* Utility functions */
 
+function generateId(option, listIndex, index = App.showCount) {
+  return `${option}_${listIndex}_${index}`;
+}
+
 function capitalizeTitle(words) {
   words = words.split('-');
   words[0] = words[0].slice(0, 1).toUpperCase() + words[0].slice(1);

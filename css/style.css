@@ -195,6 +195,10 @@ h6 {
 
 /*--------------------*/
 
+.hidden {
+  display: none;
+}
+
 .page {
   font-family: 'Fira Sans';
   font-size: calc(10px + 0.5vw);

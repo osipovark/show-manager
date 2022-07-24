@@ -108,6 +108,15 @@ class Showlist {
     this.shows = [];
   }
 
+  updateFirstIndex(startIndex) {
+    let count = startIndex;
+    this.shows.slice(startIndex + 1, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
+        item.Id = newId;
+      });
+  }
+
   updateFirstIndexDOM(startIndex) {
     let count = startIndex;
     this.shows.slice(startIndex + 1, this.shows.length).
@@ -211,6 +220,7 @@ class Show {
 
   onDeleteShow() {
     this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
+    this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
     this.eraseShow();
     this.deleteShow();
     console.log(this.showlistRef.shows.length);

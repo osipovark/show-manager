@@ -188,8 +188,17 @@ class Show {
     }
   }
 
+  eraseShow() {
+    const listname = this.Id.split('_')[0];
+    const list = document.querySelector(`.list--${listname}`);
+    document.getElementById(`${this.Id}`).remove();
+    if (list.querySelectorAll('.shows .show').length === 0) {
+      list.classList.add('hidden');
+    }
+  }
+
   onDeleteShow() {
-    console.log('delete')
+    this.eraseShow();
   }
 }
 

@@ -197,8 +197,7 @@ class Show {
   }
 
   deleteShow() {
-    const firstIndex = Number(this.Id.split('_')[1]);
-    this.showlistRef.shows.splice(firstIndex, 1);
+    this.showlistRef.shows.splice(getFirstIndexFromId(this.Id), 1);
   }
 
   onDeleteShow() {
@@ -222,4 +221,8 @@ function capitalizeTitle(words) {
 
 function getListnameFromId(Id) {
   return Id.split('_')[0];
+}
+
+function getFirstIndexFromId(Id) {
+  return Number(Id.split('_')[1]);
 }

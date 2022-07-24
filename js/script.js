@@ -112,8 +112,7 @@ class Showlist {
     let count = startIndex;
     this.shows.slice(startIndex + 1, this.shows.length).
       forEach((item) => {
-        const secondIndex = Number(item.Id.split('_')[2]);
-        const newId = generateId(getListnameFromId(item.Id), count++, secondIndex);
+        const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
         document.getElementById(`${item.Id}`).id = newId;
       });
   }
@@ -236,4 +235,8 @@ function getListnameFromId(Id) {
 
 function getFirstIndexFromId(Id) {
   return Number(Id.split('_')[1]);
+}
+
+function getSecondIndexFromId(Id) {
+  return Number(Id.split('_')[2]);
 }

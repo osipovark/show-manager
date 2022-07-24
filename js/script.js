@@ -189,8 +189,7 @@ class Show {
   }
 
   eraseShow() {
-    const listname = this.Id.split('_')[0];
-    const list = document.querySelector(`.list--${listname}`);
+    const list = document.querySelector(`.list--${getListnameFromId(this.Id)}`);
     document.getElementById(`${this.Id}`).remove();
     if (list.querySelectorAll('.shows .show').length === 0) {
       list.classList.add('hidden');
@@ -212,4 +211,8 @@ function capitalizeTitle(words) {
   words = words.split('-');
   words[0] = words[0].slice(0, 1).toUpperCase() + words[0].slice(1);
   return words.join(' ');
+}
+
+function getListnameFromId(Id) {
+  return Id.split('_')[0];
 }

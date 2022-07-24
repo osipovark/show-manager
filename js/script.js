@@ -168,7 +168,7 @@ class Show {
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('show__button');
     deleteButton.classList.add('delete');
-    deleteButton.addEventListener('click', () => console.log('delete'));
+    deleteButton.addEventListener('click', () => this.onDeleteShow());
 
     controls.append(editButton);
     controls.append(leftArrowButton);
@@ -186,6 +186,10 @@ class Show {
     } else {
       shows.append(show);
     }
+  }
+
+  onDeleteShow() {
+    console.log('delete')
   }
 }
 

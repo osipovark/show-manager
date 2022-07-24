@@ -192,12 +192,19 @@ class Show {
     const list = document.querySelector(`.list--${getListnameFromId(this.Id)}`);
     document.getElementById(`${this.Id}`).remove();
     if (list.querySelectorAll('.shows .show').length === 0) {
-      list.classList.add('hidden');
+      list.classList.remove('_active');
     }
+  }
+
+  deleteShow() {
+    const firstIndex = Number(this.Id.split('_')[1]);
+    this.showlistRef.shows.splice(firstIndex, 1);
   }
 
   onDeleteShow() {
     this.eraseShow();
+    this.deleteShow();
+    console.log(this.showlistRef.shows.length);
   }
 }
 

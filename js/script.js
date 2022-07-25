@@ -99,6 +99,29 @@ class App {
       lists.append(list);
     }
   }
+
+  decrementSecondIndex(startIndex) {
+    for (let list of this.showlists) {
+      for (let show of list.shows) {
+        const secondIndex = getSecondIndexFromId(show.Id);
+        if (secondIndex > startIndex) {
+          show.Id = generateId(list.listName, getFirstIndexFromId(show.Id), secondIndex - 1);
+        }
+      }
+    }
+  }
+
+  decrementSecondIndexDOM(startIndex) {
+    for (let list of this.showlists) {
+      for (let show of list.shows) {
+        const secondIndex = getSecondIndexFromId(show.Id);
+        if (secondIndex > startIndex) {
+          const newId = generateId(list.listName, getFirstIndexFromId(show.Id), secondIndex - 1);
+          document.getElementById(`${show.Id}`).id = newId;
+        }
+      }
+    }
+  }
 };
 
 class Showlist {
@@ -106,6 +129,24 @@ class Showlist {
     this.appRef = appRef;
     this.listName = listName;
     this.shows = [];
+  }
+
+  updateFirstIndex(startIndex) {
+    let count = startIndex;
+    this.shows.slice(startIndex + 1, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
+        item.Id = newId;
+      });
+  }
+
+  updateFirstIndexDOM(startIndex) {
+    let count = startIndex;
+    this.shows.slice(startIndex + 1, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
+        document.getElementById(`${item.Id}`).id = newId;
+      });
   }
 
   addShow(title, description) {
@@ -168,7 +209,7 @@ class Show {
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('show__button');
     deleteButton.classList.add('delete');
-    deleteButton.addEventListener('click', () => console.log('delete'));
+    deleteButton.addEventListener('click', () => this.onDeleteShow());
 
     controls.append(editButton);
     controls.append(leftArrowButton);
@@ -187,6 +228,28 @@ class Show {
       shows.append(show);
     }
   }
+
+  eraseShow() {
+    const list = document.querySelector(`.list--${getListnameFromId(this.Id)}`);
+    document.getElementById(`${this.Id}`).remove();
+    if (list.querySelectorAll('.shows .show').length === 0) {
+      list.classList.remove('_active');
+    }
+  }
+
+  deleteShow() {
+    this.showlistRef.shows.splice(getFirstIndexFromId(this.Id), 1);
+  }
+
+  onDeleteShow() {
+    this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
+    this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndexDOM(getSecondIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndex(getSecondIndexFromId(this.Id));
+    this.eraseShow();
+    this.deleteShow();
+    App.showCount--;
+  }
 }
 
 /* Utility functions */
@@ -199,4 +262,16 @@ function capitalizeTitle(words) {
   words = words.split('-');
   words[0] = words[0].slice(0, 1).toUpperCase() + words[0].slice(1);
   return words.join(' ');
+}
+
+function getListnameFromId(Id) {
+  return Id.split('_')[0];
+}
+
+function getFirstIndexFromId(Id) {
+  return Number(Id.split('_')[1]);
+}
+
+function getSecondIndexFromId(Id) {
+  return Number(Id.split('_')[2]);
 }

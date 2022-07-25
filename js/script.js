@@ -99,6 +99,18 @@ class App {
       lists.append(list);
     }
   }
+
+  decrementSecondIndexDOM(startIndex) {
+    for (let list of this.showlists) {
+      for (let show of list.shows) {
+        const secondIndex = getSecondIndexFromId(show.Id);
+        if (secondIndex > startIndex) {
+          const newId = generateId(list.listName, getFirstIndexFromId(show.Id), secondIndex - 1);
+          document.getElementById(`${show.Id}`).id = newId;
+        }
+      }
+    }
+  }
 };
 
 class Showlist {
@@ -221,6 +233,7 @@ class Show {
   onDeleteShow() {
     this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
     this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndexDOM(getSecondIndexFromId(this.Id));
     this.eraseShow();
     this.deleteShow();
     console.log(this.showlistRef.shows.length);

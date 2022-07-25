@@ -249,7 +249,6 @@ class Show {
     this.eraseShow();
     this.deleteShow();
     App.showCount--;
-    console.log(this.showlistRef.shows.length);
   }
 }
 

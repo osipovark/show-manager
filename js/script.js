@@ -100,6 +100,17 @@ class App {
     }
   }
 
+  decrementSecondIndex(startIndex) {
+    for (let list of this.showlists) {
+      for (let show of list.shows) {
+        const secondIndex = getSecondIndexFromId(show.Id);
+        if (secondIndex > startIndex) {
+          show.Id = generateId(list.listName, getFirstIndexFromId(show.Id), secondIndex - 1);
+        }
+      }
+    }
+  }
+
   decrementSecondIndexDOM(startIndex) {
     for (let list of this.showlists) {
       for (let show of list.shows) {
@@ -234,6 +245,7 @@ class Show {
     this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
     this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
     this.showlistRef.appRef.decrementSecondIndexDOM(getSecondIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndex(getSecondIndexFromId(this.Id));
     this.eraseShow();
     this.deleteShow();
     console.log(this.showlistRef.shows.length);

@@ -140,11 +140,27 @@ class Showlist {
       });
   }
 
+  incrementFirstIndex() {
+    this.shows.slice(1, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) + 1, getSecondIndexFromId(item.Id));
+        item.Id = newId;
+      });
+  }
+
   updateFirstIndexDOM(startIndex) {
     let count = startIndex;
     this.shows.slice(startIndex + 1, this.shows.length).
       forEach((item) => {
         const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
+        document.getElementById(`${item.Id}`).id = newId;
+      });
+  }
+
+  incrementFirstIndexDOM() {
+    this.shows.slice(1, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) + 1, getSecondIndexFromId(item.Id));
         document.getElementById(`${item.Id}`).id = newId;
       });
   }
@@ -296,6 +312,8 @@ class Show {
     if (this.isLastInList()) {
       this.eraseShow();
       this.moveToNext();
+      this.showlistRef.incrementFirstIndexDOM();
+      this.showlistRef.incrementFirstIndex();
     } else {
       this.moveRight();
     }

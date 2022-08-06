@@ -233,9 +233,13 @@ class Show {
     return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
   }
 
+  moveToNext() {
+    console.log('move to next list');
+  }
+
   onMoveRight() {
     if (this.isLastInList()) {
-      console.log('move to next list');
+      this.moveToNext();
     } else {
       console.log('move right');
     }

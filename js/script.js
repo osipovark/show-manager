@@ -237,11 +237,15 @@ class Show {
     console.log('move to next list');
   }
 
+  moveRight() {
+    console.log('move right');
+  }
+
   onMoveRight() {
     if (this.isLastInList()) {
       this.moveToNext();
     } else {
-      console.log('move right');
+      this.moveRight();
     }
   }
 

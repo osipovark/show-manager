@@ -234,7 +234,13 @@ class Show {
   }
 
   moveToNext() {
-    console.log('move to next list');
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex + 1];
+    toShowlist.shows.unshift(fromShowlist.shows.pop());
+    this.Id = generateId(toShowlist.listName, 0, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
   }
 
   putAfter(fixed) {
@@ -288,6 +294,7 @@ class Show {
 
   onMoveRight() {
     if (this.isLastInList()) {
+      this.eraseShow();
       this.moveToNext();
     } else {
       this.moveRight();

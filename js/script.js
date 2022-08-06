@@ -314,6 +314,7 @@ class Show {
       this.moveToNext();
       this.showlistRef.incrementFirstIndexDOM();
       this.showlistRef.incrementFirstIndex();
+      this.renderShow(true);
     } else {
       this.moveRight();
     }

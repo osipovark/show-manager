@@ -262,11 +262,18 @@ class Show {
     }
   }
 
+  swapFirstIndexes(fixed) {
+    const movingIndex = getFirstIndexFromId(this.Id);
+    this.Id = generateId(this.showlistRef.listName, getFirstIndexFromId(fixed.Id), getSecondIndexFromId(this.Id));
+    fixed.Id = generateId(this.showlistRef.listName, movingIndex, getSecondIndexFromId(fixed.Id));
+  }
+
   moveRight() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
     this.putAfter(fixedShow);
     this.swapFirstIndexesDOM(fixedShow);
     this.swapShows(fixedShow);
+    this.swapFirstIndexes(fixedShow);
   }
 
   onMoveRight() {

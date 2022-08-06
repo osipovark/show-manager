@@ -244,9 +244,18 @@ class Show {
     fixedElement.after(movingElement);
   }
 
+  swapFirstIndexesDOM(fixed) {
+    const movingElement = document.getElementById(this.Id);
+    const fixedElement = document.getElementById(fixed.Id);
+    const fromIndex = getFirstIndexFromId(this.Id);
+    movingElement.id = generateId(this.showlistRef.listName, getFirstIndexFromId(fixed.Id), getSecondIndexFromId(this.Id));
+    fixedElement.id = generateId(this.showlistRef.listName, fromIndex, getSecondIndexFromId(fixed.Id));
+  }
+
   moveRight() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
     this.putAfter(fixedShow);
+    this.swapFirstIndexesDOM(fixedShow);
   }
 
   onMoveRight() {

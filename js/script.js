@@ -204,7 +204,7 @@ class Show {
     const rightArrowButton = document.createElement('button');
     rightArrowButton.classList.add('show__button');
     rightArrowButton.classList.add('right-arrow');
-    rightArrowButton.addEventListener('click', () => console.log('right arrow'));
+    rightArrowButton.addEventListener('click', () => this.onMoveRight());
 
     const deleteButton = document.createElement('button');
     deleteButton.classList.add('show__button');
@@ -227,6 +227,10 @@ class Show {
     } else {
       shows.append(show);
     }
+  }
+
+  onMoveRight() {
+    console.log('right arrow');
   }
 
   eraseShow() {

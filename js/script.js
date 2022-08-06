@@ -229,8 +229,16 @@ class Show {
     }
   }
 
+  isLastInList() {
+    return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
+  }
+
   onMoveRight() {
-    console.log('right arrow');
+    if (this.isLastInList()) {
+      console.log('move to next list');
+    } else {
+      console.log('move right');
+    }
   }
 
   eraseShow() {

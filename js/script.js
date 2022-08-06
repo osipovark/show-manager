@@ -268,12 +268,22 @@ class Show {
     fixed.Id = generateId(this.showlistRef.listName, movingIndex, getSecondIndexFromId(fixed.Id));
   }
 
+  restoreEventListeners() {
+    const show = document.getElementById(this.Id);
+
+    show.querySelector('.edit').addEventListener('click', () => this.onEditShow());
+    show.querySelector('.left-arrow').addEventListener('click', () => this.onMoveLeft());
+    show.querySelector('.right-arrow').addEventListener('click', () => this.onMoveRight());
+    show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
+  }
+
   moveRight() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
     this.putAfter(fixedShow);
     this.swapFirstIndexesDOM(fixedShow);
     this.swapShows(fixedShow);
     this.swapFirstIndexes(fixedShow);
+    this.restoreEventListeners();
   }
 
   onMoveRight() {

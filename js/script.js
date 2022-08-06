@@ -252,10 +252,21 @@ class Show {
     fixedElement.id = generateId(this.showlistRef.listName, fromIndex, getSecondIndexFromId(fixed.Id));
   }
 
+  swapShows(fixed) {
+    const fixedIndex = getFirstIndexFromId(fixed.Id);
+    const movingIndex = getFirstIndexFromId(this.Id);
+    if (fixedIndex < movingIndex) {
+      this.showlistRef.shows.splice(fixedIndex, 2, ...this.showlistRef.shows.slice(fixedIndex, movingIndex + 1).reverse());
+    } else {
+      this.showlistRef.shows.splice(movingIndex, 2, ...this.showlistRef.shows.slice(movingIndex, fixedIndex + 1).reverse());
+    }
+  }
+
   moveRight() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
     this.putAfter(fixedShow);
     this.swapFirstIndexesDOM(fixedShow);
+    this.swapShows(fixedShow);
   }
 
   onMoveRight() {

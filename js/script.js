@@ -237,8 +237,16 @@ class Show {
     console.log('move to next list');
   }
 
+  putAfter(fixed) {
+    const movingElement = document.getElementById(this.Id).cloneNode(true);
+    const fixedElement = document.getElementById(fixed.Id);
+    document.getElementById(this.Id).remove();
+    fixedElement.after(movingElement);
+  }
+
   moveRight() {
-    console.log('move right');
+    const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
+    this.putAfter(fixedShow);
   }
 
   onMoveRight() {

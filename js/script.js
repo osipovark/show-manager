@@ -290,6 +290,7 @@ class Show {
     this.putBefore(fixedShow);
     this.swapFirstIndexesDOM(fixedShow);
     this.swapShows(fixedShow);
+    this.swapFirstIndexes(fixedShow);
   }
 
   isFirstInList() {

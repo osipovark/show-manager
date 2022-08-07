@@ -282,9 +282,13 @@ class Show {
     return (getFirstIndexFromId(this.Id) === 0);
   }
 
+  moveToPrevious() {
+    console.log('move to previous list');
+  }
+
   onMoveLeft() {
     if (this.isFirstInList()) {
-      console.log('move to previous list');
+      this.moveToPrevious();
     } else {
       console.log('move left');
     }

@@ -278,8 +278,16 @@ class Show {
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
   }
 
+  putBefore(fixed) {
+    const movingElement = document.getElementById(this.Id).cloneNode(true);
+    const fixedElement = document.getElementById(fixed.Id);
+    document.getElementById(this.Id).remove();
+    fixedElement.before(movingElement);
+  }
+
   moveLeft() {
-    console.log('move left');
+    const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) - 1];
+    this.putBefore(fixedShow);
   }
 
   isFirstInList() {

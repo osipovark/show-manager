@@ -291,6 +291,7 @@ class Show {
     this.swapFirstIndexesDOM(fixedShow);
     this.swapShows(fixedShow);
     this.swapFirstIndexes(fixedShow);
+    this.restoreEventListeners();
   }
 
   isFirstInList() {

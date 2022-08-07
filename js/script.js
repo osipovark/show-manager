@@ -278,8 +278,16 @@ class Show {
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
   }
 
+  isFirstInList() {
+    return (getFirstIndexFromId(this.Id) === 0);
+  }
+
   onMoveLeft() {
-    console.log('left arrow');
+    if (this.isFirstInList()) {
+      console.log('move to previous list');
+    } else {
+      console.log('move left');
+    }
   }
 
   putAfter(fixed) {

@@ -331,6 +331,7 @@ class Show {
       this.moveToPrevious();
       fromList.decrementFirstIndexDOM();
       fromList.decrementFirstIndex();
+      this.renderShow();
     } else {
       this.moveLeft();
     }

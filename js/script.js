@@ -215,7 +215,7 @@ class Show {
     const leftArrowButton = document.createElement('button');
     leftArrowButton.classList.add('show__button');
     leftArrowButton.classList.add('left-arrow');
-    leftArrowButton.addEventListener('click', () => console.log('left arrow'));
+    leftArrowButton.addEventListener('click', () => this.onMoveLeft());
 
     const rightArrowButton = document.createElement('button');
     rightArrowButton.classList.add('show__button');
@@ -276,6 +276,10 @@ class Show {
     show.querySelector('.left-arrow').addEventListener('click', () => this.onMoveLeft());
     show.querySelector('.right-arrow').addEventListener('click', () => this.onMoveRight());
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
+  }
+
+  onMoveLeft() {
+    console.log('left arrow');
   }
 
   putAfter(fixed) {

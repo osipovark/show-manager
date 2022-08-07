@@ -140,6 +140,14 @@ class Showlist {
       });
   }
 
+  decrementFirstIndex() {
+    this.shows.slice(0, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) - 1, getSecondIndexFromId(item.Id));
+        item.Id = newId;
+      });
+  }
+
   incrementFirstIndex() {
     this.shows.slice(1, this.shows.length).
       forEach((item) => {
@@ -321,6 +329,7 @@ class Show {
       this.eraseShow();
       this.moveToPrevious();
       fromList.decrementFirstIndexDOM();
+      fromList.decrementFirstIndex();
     } else {
       this.moveLeft();
     }

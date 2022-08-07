@@ -245,27 +245,6 @@ class Show {
     }
   }
 
-  isLastInList() {
-    return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
-  }
-
-  moveToNext() {
-    const app = this.showlistRef.appRef;
-    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
-    const fromShowlist = app.showlists[fromShowlistIndex];
-    const toShowlist = app.showlists[fromShowlistIndex + 1];
-    toShowlist.shows.unshift(fromShowlist.shows.pop());
-    this.Id = generateId(toShowlist.listName, 0, getSecondIndexFromId(this.Id));
-    this.showlistRef = toShowlist;
-  }
-
-  putAfter(fixed) {
-    const movingElement = document.getElementById(this.Id).cloneNode(true);
-    const fixedElement = document.getElementById(fixed.Id);
-    document.getElementById(this.Id).remove();
-    fixedElement.after(movingElement);
-  }
-
   swapFirstIndexesDOM(fixed) {
     const movingElement = document.getElementById(this.Id);
     const fixedElement = document.getElementById(fixed.Id);
@@ -299,6 +278,13 @@ class Show {
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
   }
 
+  putAfter(fixed) {
+    const movingElement = document.getElementById(this.Id).cloneNode(true);
+    const fixedElement = document.getElementById(fixed.Id);
+    document.getElementById(this.Id).remove();
+    fixedElement.after(movingElement);
+  }
+
   moveRight() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) + 1];
     this.putAfter(fixedShow);
@@ -306,6 +292,20 @@ class Show {
     this.swapShows(fixedShow);
     this.swapFirstIndexes(fixedShow);
     this.restoreEventListeners();
+  }
+
+  isLastInList() {
+    return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
+  }
+
+  moveToNext() {
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex + 1];
+    toShowlist.shows.unshift(fromShowlist.shows.pop());
+    this.Id = generateId(toShowlist.listName, 0, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
   }
 
   onMoveRight() {

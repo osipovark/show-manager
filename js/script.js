@@ -288,6 +288,7 @@ class Show {
   moveLeft() {
     const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) - 1];
     this.putBefore(fixedShow);
+    this.swapFirstIndexesDOM(fixedShow);
   }
 
   isFirstInList() {

@@ -299,11 +299,18 @@ class Show {
   }
 
   moveToPrevious() {
-    console.log('move to previous list');
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex - 1];
+    toShowlist.shows.push(fromShowlist.shows.shift());
+    this.Id = generateId(toShowlist.listName, toShowlist.shows.length - 1, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
   }
 
   onMoveLeft() {
     if (this.isFirstInList()) {
+      this.eraseShow();
       this.moveToPrevious();
     } else {
       this.moveLeft();

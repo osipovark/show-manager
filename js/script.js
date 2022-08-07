@@ -157,6 +157,14 @@ class Showlist {
       });
   }
 
+  decrementFirstIndexDOM() {
+    this.shows.slice(0, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) - 1, getSecondIndexFromId(item.Id));
+        document.getElementById(`${item.Id}`).id = newId;
+      });
+  }
+
   incrementFirstIndexDOM() {
     this.shows.slice(1, this.shows.length).
       forEach((item) => {
@@ -312,6 +320,7 @@ class Show {
     if (this.isFirstInList()) {
       this.eraseShow();
       this.moveToPrevious();
+      fromList.decrementFirstIndexDOM();
     } else {
       this.moveLeft();
     }

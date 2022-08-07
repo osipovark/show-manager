@@ -326,6 +326,7 @@ class Show {
 
   onMoveLeft() {
     if (this.isFirstInList()) {
+      const fromList = this.showlistRef;
       this.eraseShow();
       this.moveToPrevious();
       fromList.decrementFirstIndexDOM();

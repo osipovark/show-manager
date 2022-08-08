@@ -401,6 +401,14 @@ class Show {
     }
   }
 
+  editFields(title, description, option) {
+    this.showlistRef = this.showlistRef.appRef.showlists.find((list) => list.listName === option);
+    this.title = title;
+    this.description = description;
+    this.Id = generateId(this.showlistRef.listName, this.showlistRef.shows.length, getSecondIndexFromId(this.Id));
+    this.showlistRef.shows.push(this);
+  }
+
   onEditShow() {
     const buttonAdd = document.getElementById('submit-show-button');
     const buttonChange = document.getElementById('change-show-button');
@@ -417,6 +425,25 @@ class Show {
     title.value = this.title;
     description.value = this.description;
     option.value = this.showlistRef.listName;
+    document.getElementById('change-show-button').addEventListener('click', () => {
+      if (!title.value) {
+        alert("Show has to have a title");
+        title.focus();
+        return;
+      }
+      if (option.value !== getListnameFromId(this.Id)) {
+        this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
+        this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
+        this.eraseShow();
+        this.deleteShow();
+        this.editFields(title.value, description.value, option.value);
+        this.renderShow();
+      }
+      title.value = 'title';
+      description.value = 'text';
+      option.value = 'plan-to-watch';
+      document.querySelector('.add-show-form').classList.remove('_active');
+    });
   }
 }
 

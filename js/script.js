@@ -411,6 +411,12 @@ class Show {
       buttonChange.classList.remove('hidden');
     }
     document.querySelector('.add-show-form').classList.add('_active');
+    const title = document.getElementById('added-show-title');
+    const description = document.getElementById('added-show-description');
+    const option = document.getElementById('added-show-list');
+    title.value = this.title;
+    description.value = this.description;
+    option.value = this.showlistRef.listName;
   }
 }
 

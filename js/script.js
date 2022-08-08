@@ -140,6 +140,14 @@ class Showlist {
       });
   }
 
+  decrementFirstIndex() {
+    this.shows.slice(0, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) - 1, getSecondIndexFromId(item.Id));
+        item.Id = newId;
+      });
+  }
+
   incrementFirstIndex() {
     this.shows.slice(1, this.shows.length).
       forEach((item) => {
@@ -153,6 +161,14 @@ class Showlist {
     this.shows.slice(startIndex + 1, this.shows.length).
       forEach((item) => {
         const newId = generateId(getListnameFromId(item.Id), count++, getSecondIndexFromId(item.Id));
+        document.getElementById(`${item.Id}`).id = newId;
+      });
+  }
+
+  decrementFirstIndexDOM() {
+    this.shows.slice(0, this.shows.length).
+      forEach((item) => {
+        const newId = generateId(getListnameFromId(item.Id), getFirstIndexFromId(item.Id) - 1, getSecondIndexFromId(item.Id));
         document.getElementById(`${item.Id}`).id = newId;
       });
   }
@@ -215,7 +231,7 @@ class Show {
     const leftArrowButton = document.createElement('button');
     leftArrowButton.classList.add('show__button');
     leftArrowButton.classList.add('left-arrow');
-    leftArrowButton.addEventListener('click', () => console.log('left arrow'));
+    leftArrowButton.addEventListener('click', () => this.onMoveLeft());
 
     const rightArrowButton = document.createElement('button');
     rightArrowButton.classList.add('show__button');
@@ -276,6 +292,49 @@ class Show {
     show.querySelector('.left-arrow').addEventListener('click', () => this.onMoveLeft());
     show.querySelector('.right-arrow').addEventListener('click', () => this.onMoveRight());
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
+  }
+
+  putBefore(fixed) {
+    const movingElement = document.getElementById(this.Id).cloneNode(true);
+    const fixedElement = document.getElementById(fixed.Id);
+    document.getElementById(this.Id).remove();
+    fixedElement.before(movingElement);
+  }
+
+  moveLeft() {
+    const fixedShow = this.showlistRef.shows[getFirstIndexFromId(this.Id) - 1];
+    this.putBefore(fixedShow);
+    this.swapFirstIndexesDOM(fixedShow);
+    this.swapShows(fixedShow);
+    this.swapFirstIndexes(fixedShow);
+    this.restoreEventListeners();
+  }
+
+  isFirstInList() {
+    return (getFirstIndexFromId(this.Id) === 0);
+  }
+
+  moveToPrevious() {
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex - 1];
+    toShowlist.shows.push(fromShowlist.shows.shift());
+    this.Id = generateId(toShowlist.listName, toShowlist.shows.length - 1, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
+  }
+
+  onMoveLeft() {
+    if (this.isFirstInList()) {
+      const fromList = this.showlistRef;
+      this.eraseShow();
+      this.moveToPrevious();
+      fromList.decrementFirstIndexDOM();
+      fromList.decrementFirstIndex();
+      this.renderShow();
+    } else {
+      this.moveLeft();
+    }
   }
 
   putAfter(fixed) {

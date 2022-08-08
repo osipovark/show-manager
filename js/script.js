@@ -402,7 +402,15 @@ class Show {
   }
 
   onEditShow() {
-    console.log('edit');
+    const buttonAdd = document.getElementById('submit-show-button');
+    const buttonChange = document.getElementById('change-show-button');
+    if (!buttonAdd.classList.contains('hidden')) {
+      buttonAdd.classList.add('hidden');
+    }
+    if (buttonChange.classList.contains('hidden')) {
+      buttonChange.classList.remove('hidden');
+    }
+    document.querySelector('.add-show-form').classList.add('_active');
   }
 }
 

@@ -261,6 +261,28 @@ class Show {
     }
   }
 
+  eraseShow() {
+    const list = document.querySelector(`.list--${getListnameFromId(this.Id)}`);
+    document.getElementById(`${this.Id}`).remove();
+    if (list.querySelectorAll('.shows .show').length === 0) {
+      list.classList.remove('_active');
+    }
+  }
+
+  deleteShow() {
+    this.showlistRef.shows.splice(getFirstIndexFromId(this.Id), 1);
+  }
+
+  onDeleteShow() {
+    this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
+    this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndexDOM(getSecondIndexFromId(this.Id));
+    this.showlistRef.appRef.decrementSecondIndex(getSecondIndexFromId(this.Id));
+    this.eraseShow();
+    this.deleteShow();
+    App.showCount--;
+  }
+
   swapFirstIndexesDOM(fixed) {
     const movingElement = document.getElementById(this.Id);
     const fixedElement = document.getElementById(fixed.Id);
@@ -294,6 +316,20 @@ class Show {
     show.querySelector('.delete').addEventListener('click', () => this.onDeleteShow());
   }
 
+  isFirstInList() {
+    return (getFirstIndexFromId(this.Id) === 0);
+  }
+
+  moveToPrevious() {
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex - 1];
+    toShowlist.shows.push(fromShowlist.shows.shift());
+    this.Id = generateId(toShowlist.listName, toShowlist.shows.length - 1, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
+  }
+
   putBefore(fixed) {
     const movingElement = document.getElementById(this.Id).cloneNode(true);
     const fixedElement = document.getElementById(fixed.Id);
@@ -310,20 +346,6 @@ class Show {
     this.restoreEventListeners();
   }
 
-  isFirstInList() {
-    return (getFirstIndexFromId(this.Id) === 0);
-  }
-
-  moveToPrevious() {
-    const app = this.showlistRef.appRef;
-    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
-    const fromShowlist = app.showlists[fromShowlistIndex];
-    const toShowlist = app.showlists[fromShowlistIndex - 1];
-    toShowlist.shows.push(fromShowlist.shows.shift());
-    this.Id = generateId(toShowlist.listName, toShowlist.shows.length - 1, getSecondIndexFromId(this.Id));
-    this.showlistRef = toShowlist;
-  }
-
   onMoveLeft() {
     if (this.isFirstInList()) {
       const fromList = this.showlistRef;
@@ -335,6 +357,20 @@ class Show {
     } else {
       this.moveLeft();
     }
+  }
+
+  isLastInList() {
+    return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
+  }
+
+  moveToNext() {
+    const app = this.showlistRef.appRef;
+    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
+    const fromShowlist = app.showlists[fromShowlistIndex];
+    const toShowlist = app.showlists[fromShowlistIndex + 1];
+    toShowlist.shows.unshift(fromShowlist.shows.pop());
+    this.Id = generateId(toShowlist.listName, 0, getSecondIndexFromId(this.Id));
+    this.showlistRef = toShowlist;
   }
 
   putAfter(fixed) {
@@ -353,20 +389,6 @@ class Show {
     this.restoreEventListeners();
   }
 
-  isLastInList() {
-    return (getFirstIndexFromId(this.Id) === (this.showlistRef.shows.length - 1));
-  }
-
-  moveToNext() {
-    const app = this.showlistRef.appRef;
-    const fromShowlistIndex = app.showlists.findIndex(showlist => this.showlistRef === showlist);
-    const fromShowlist = app.showlists[fromShowlistIndex];
-    const toShowlist = app.showlists[fromShowlistIndex + 1];
-    toShowlist.shows.unshift(fromShowlist.shows.pop());
-    this.Id = generateId(toShowlist.listName, 0, getSecondIndexFromId(this.Id));
-    this.showlistRef = toShowlist;
-  }
-
   onMoveRight() {
     if (this.isLastInList()) {
       this.eraseShow();
@@ -377,28 +399,6 @@ class Show {
     } else {
       this.moveRight();
     }
-  }
-
-  eraseShow() {
-    const list = document.querySelector(`.list--${getListnameFromId(this.Id)}`);
-    document.getElementById(`${this.Id}`).remove();
-    if (list.querySelectorAll('.shows .show').length === 0) {
-      list.classList.remove('_active');
-    }
-  }
-
-  deleteShow() {
-    this.showlistRef.shows.splice(getFirstIndexFromId(this.Id), 1);
-  }
-
-  onDeleteShow() {
-    this.showlistRef.updateFirstIndexDOM(getFirstIndexFromId(this.Id));
-    this.showlistRef.updateFirstIndex(getFirstIndexFromId(this.Id));
-    this.showlistRef.appRef.decrementSecondIndexDOM(getSecondIndexFromId(this.Id));
-    this.showlistRef.appRef.decrementSecondIndex(getSecondIndexFromId(this.Id));
-    this.eraseShow();
-    this.deleteShow();
-    App.showCount--;
   }
 }
 

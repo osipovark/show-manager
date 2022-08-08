@@ -226,7 +226,7 @@ class Show {
     const editButton = document.createElement('button');
     editButton.classList.add('show__button');
     editButton.classList.add('edit');
-    editButton.addEventListener('click', () => console.log('edit'));
+    editButton.addEventListener('click', () => this.onEditShow());
 
     const leftArrowButton = document.createElement('button');
     leftArrowButton.classList.add('show__button');
@@ -399,6 +399,10 @@ class Show {
     } else {
       this.moveRight();
     }
+  }
+
+  onEditShow() {
+    console.log('edit');
   }
 }
 
